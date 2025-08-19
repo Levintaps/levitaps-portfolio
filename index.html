@@ -3,23 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Webpage</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            font-size: 3rem;
-            color: #333;
-        }
-    </style>
+    <title>Jayson Levin Tapia | Developer & Architect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script><!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script><!-- GSAP ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script><!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><!-- SweetAlert2 for the alert messages -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script><!-- Axios for making HTTP requests -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script><!-- Typed.js for the typing effect -->
 </head>
 <body>
-    <h1>Hello there!</h1>
+    <canvas id="canvas-container"></canvas>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">JLT</div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="mobile-menu">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-container">
+                    <div class="profile-wrapper">
+                        <img src="images/test.jpg" alt="Jayson Levin Tapia" class="profile-image">
+                    </div>
+                    <div>
+                        <h1 class="name">Jayson Levin Tapia</h1>
+                        <div class="title-container">
+                            <p class="title"></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="hero-text">Building innovative digital experiences with cutting-edge technologies. Focused on building the Future of Tech – Secure Code, Immersive Games, and Dynamic Web Solutions.</p>
+                <div class="hero-buttons">
+                    <button class="btn see-more-btn">More About Me</button>
+                    <button class="btn" id="view-cv-btn">View My CV</button>
+                    <a href="#contact"><button class="btn">Let's Connect</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- CV Request Modal -->
+    <div class="modal" id="cv-request-modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-cv-modal" aria-label="Close CV request modal">×</span>
+            <h2 class="modal-title">CV Access Verification</h2>
+            <div class="modal-body">
+                <p>Your request to access my CV is appreciated. Kindly submit your details below for review. Upon approval, I will provide you with access to my CV at the earliest opportunity.</p>
+                <form id="cv-request-form" class="cv-request-form">
+                    <div class="form-group">
+                        <label for="cv-name">Name</label>
+                        <input type="text" id="cv-name" name="name" class="form-input" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cv-email">Email</label>
+                        <input type="email" id="cv-email" name="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cv-message">Message (Optional)</label>
+                        <textarea id="cv-message" name="message" class="form-input form-textarea" placeholder="Why do you want to access my CV?"></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Submit Request</button>
+                </form>
+                <div class="form-message" id="cv-form-message"></div>
+            </div>
+        </div>
+    </div>
+
+        <!-- More About Me -->
+    <div class="modal" id="about-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">About Me</h2>
+            <div class="modal-body">
+                <p>I’m Jayson Levin Tapia, a passionate Full Stack Developer, UI/UX Designer, and chess enthusiast. With over 5 years of experience in software development, I specialize in creating responsive, high-performance applications using modern technologies like React, Python, and Unity. My journey in tech has been driven by a love for problem-solving and a desire to craft immersive digital experiences.</p>
+                <p>Beyond coding, I have a deep passion for chess, where I’ve competed in various tournaments and achieved notable rankings across multiple platforms. I also enjoy designing cyberpunk-inspired art and exploring the latest tech trends.</p>
+                <div class="modal-buttons">
+                    <button class="chess-career-btn">See My Chess Career</button>
+                    <button class="ingame-profile-btn">My In-Game Profiles</button>
+                </div>
+                <div class="chess-career" style="display: none;">
+                    <h3 class="chess-title">Chess Achievements</h3>
+                    <ul class="chess-achievements">
+                        <li>Champion ng pamilya namin</li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <h3 class="chess-title">Chess Details</h3>
+                    <div class="chess-details">
+                        <div class="chess-id">
+                            <p><strong>Professional Chess Player ID:</strong></p>
+                            <img src="images/chess-id.jpg" alt="Chess Player ID" class="chess-id-image">
+                        </div>
+                        <p><strong>Chess.com:</strong> <a href="https://www.chess.com/member/jaysonlevintapia" target="_blank" class="chess-link">View Profile</a> | <span>Elo: 2500+</span></p>
+                        <p><strong>Lichess:</strong> <a href="https://lichess.org/@/WeakButWeakness" target="_blank" class="chess-link">View Profile</a> | <span>Elo: 2800+</span></p>
+                        <p><strong>Local Elo:</strong> <a href="https://chessportalph.org/ratings" target="_blank" class="chess-link"><span>Elo: 2189</span></p>
+                        <p><strong>FIDE Rating:</strong> <a href="https://ratings.fide.com/profile/5230411" target="_blank" class="chess-link"><span>Elo: 2155</span></p>
+                    </div>
+                </div>
+                <div class="ingame-profiles" style="display: none;">
+                    <h3 class="ingame-title">My In-Game Profiles</h3>
+                    <div class="ingame-details">
+                        <div class="game-profile">
+                            <h4 class="game-name">Mobile Legends</h4>
+                            <p><strong>Username:</strong> Levi</p>
+                            <p><strong>ID:</strong> 236699016</p>
+                            <p><strong>Rank:</strong> Mythic Immortal</p>
+                            <p><a href="https://m.mobilelegends.com/profile/your-id" target="_blank" class="ingame-link">View Profile</a></p>
+                        </div>
+                        <div class="game-profile">
+                            <h4 class="game-name">Call of Duty Mobile</h4>
+                            <p><strong>Username:</strong> Levi</p>
+                            <p><strong>ID:</strong> 987654321</p>
+                            <p><strong>Rank:</strong> Legendary</p>
+                            <p><a href="https://www.callofduty.com/profile/your-id" target="_blank" class="ingame-link">View Profile</a></p>
+                        </div>
+                        <div class="game-profile">
+                            <h4 class="game-name">Dota 2</h4>
+                            <p><strong>Username:</strong> Levi</p>
+                            <p><strong>Steam ID:</strong> 1234567890</p>
+                            <p><strong>MMR:</strong> Uncalibrated</p>
+                            <p><a href="https://www.dotabuff.com/players/your-steam-id" target="_blank" class="ingame-link">View Profile</a></p>
+                        </div>
+                        <div class="game-profile">
+                            <h4 class="game-name">Clash of Clans</h4>
+                            <p><strong>Username:</strong> Levi</p>
+                            <p><strong>Player Tag:</strong> #ABC123XYZ</p>
+                            <p><strong>Town Hall Level:</strong> 15</p>
+                            <p><a href="https://link.clashofclans.com/en?action=OpenPlayerProfile&tag=your-player-tag" target="_blank" class="ingame-link">View Profile</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Fullstack Development</h3>
+                    <ul class="skill-list">
+                        <li>JavaScript</li>
+                        <li>HTML/CSS</li>
+                        <li>React</li>
+                        <li>Springboot</li>
+                        <li>MySql/PostgreSql</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-network-wired"></i> System Administrator</h3>
+                    <ul class="skill-list">
+                        <li>Windows</li>
+                        <li>Linux</li>
+                        <li>CLI</li>
+                        <li>Virtual Machine</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile Development</h3>
+                    <ul class="skill-list">
+                        <li>React Native</li>
+                        <li>Flutter</li>
+                        <li>Firebase</li>
+                        <li>Kotlin</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-gamepad"></i> Game Development</h3>
+                    <ul class="skill-list">
+                        <li>Unity</li>
+                        <li>C#</li>
+                        <li>2D Modeling</li>
+                        <li>3D Modeling</li>
+                        <li>Game Design</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-circle-info"></i> Others</h3>
+                    <ul class="skill-list">
+                        <li>Pro Chess Player</li>
+                        <li>Thesis Maker</li>
+                        <li></li>
+                        <li>3D Modeling</li>
+                        <li>Game Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="html/css">HTML5/CSS</button>
+                <button class="filter-btn" data-filter="javascript">JavaScript</button>
+                <button class="filter-btn" data-filter="python">Python</button>
+                <button class="filter-btn" data-filter="java">Java</button>
+                <button class="filter-btn" data-filter="springboot">Springboot</button>
+                <button class="filter-btn" data-filter="csharp">C#</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="game">Game Dev</button>
+                <button class="filter-btn" data-filter="api">API</button>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card" data-tech="javascript,react,html/css,springboot">
+                    <img src="gif/Lookwhatchera.gif" alt="Project 1" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Lookwhatchera</h3>
+                        <p class="project-description">A modern smart navigation with AI-powered assistant. Meet GabAI, your personal travel companion that provides real-time recommendations and assistance.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML5/CSS</span>
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Springboot</span>
+                            <span class="tech-tag">MySql</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://levi-lookwhatchera.vercel.app/" target="_blank" class="project-link live">Live Demo</a>
+                            <a href="#" class="project-link code">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-tech="java">
+                    <img src="images/profile.jpg" alt="Project 2" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Hardware Management System</h3>
+                        <p class="project-description">An offline desktop application for seamless hardware management. Built using Java JFrame, it offers a smooth and efficient way to manage and track hardware resources with ease.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">JFrames</span>
+                            <span class="tech-tag">MySql</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link live">Live Demo</a>
+                            <a href="#" class="project-link code">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-tech="java,springboot,api">
+                    <img src="images/profile.jpg" alt="Project 3" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Real-time Chatbot</h3>
+                        <p class="project-description">An intelligent chatbot powered by the Gemini API. Delivers real-time responses, providing users with instant assistance and an engaging, conversational experience.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link live">Live Demo</a>
+                            <a href="#" class="project-link code">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-tech="csharp,game,unity">
+                    <img src="images/profile.jpg" alt="Project 4" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Maze Master</h3>
+                        <p class="project-description">Navigate through intricate mazes in this exciting Unity-based game. Developed using C#, it offers challenging puzzles, dynamic gameplay, and immersive 3D environments..</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Unity</span>
+                            <span class="tech-tag">3D Modeling</span>
+                            <span class="tech-tag">Game Design</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link live">Download App</a>
+                            <a href="#" class="project-link code">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-tech="csharp,game,unity">
+                    <img src="images/profile.jpg" alt="Project 5" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Flying Frog</h3>
+                        <p class="project-description">Guide a daring frog through tricky obstacles in this Unity 2D game. Developed using C#, it offers addictive, Flappy Bird-style gameplay with a fun and quirky twist.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Unity</span>
+                            <span class="tech-tag">2D Modeling</span>
+                            <span class="tech-tag">Game Design</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link live">Download App</a>
+                            <a href="#" class="project-link code">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-tech="javascript,html/css">
+                    <img src="images/profile.jpg" alt="Project 6" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Valentine Website</h3>
+                        <p class="project-description">A visually stunning website that celebrates love and connection. Built using HTML, CSS, and JavaScript, it offers users a charming and interactive platform to explore romantic content, send personalized messages, and experience seamless front-end functionality.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML5/CSS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://margaux-valentine.vercel.app/" class="project-link live">Live Demo</a>
+                            <a href="#" class="project-link code">View Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Personal Contact</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <a href="mailto:levintaps@gmail.com" class="contact-link glitch" data-text="levintaps@gmail.com">levintaps@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📞</span>
+                            <a href="phone:0921-480-5230" class="contact-link glitch" data-text="+63 921 480 5230">+63 921 480 5230</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <a href="https://maps.app.goo.gl/rPAZmVSmKRoxRW3AA" target="_blank" class="contact-link glitch" data-text="Antipolo City, 1870 Rizal, Philippines">Antipolo City, 1870 Rizal, Philippines</a>
+                        </div>
+                    </div>
+                </div>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="contactName" name="from_name" class="form-input" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="contactEmail" name="from_email" class="form-input" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="contactSubject" name="subject" class="form-input" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="contactMessage" name="message" class="form-input form-textarea" placeholder="Message" required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+            </div>
+            <div id="formMessage" class="form-message"></div>
+        </div>
+    </section>
+        
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-info">
+                        <div class="footer-logo">JLT</div>
+                        <p class="footer-text">Creating innovative digital solutions with cutting-edge technologies. Let's build something amazing together.</p>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/Levintaps" target="_blank" class="social-link">
+                            <span class="social-icon"><i class="fab fa-github"></i></span>
+                        </a>
+                        <a href="www.linkedin.com/in/levintaps" target="_blank" class="social-link">
+                            <span class="social-icon"><i class="fab fa-linkedin"></i></span>
+                        </a>
+                        <a href="https://www.facebook.com/jaysonlevin.tapia" target="_blank" class="social-link">
+                            <span class="social-icon"><i class="fab fa-facebook"></i></span>
+                        </a>
+                        <a href="#" target="_blank" class="social-link">
+                            <span class="social-icon"><i class="fab fa-instagram"></i></span>
+                        </a>
+                        <a href="https://discordapp.com/users/1301537425247703062" target="_blank" class="social-link">
+                            <span class="social-icon"><i class="fab fa-discord"></i></span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    © 2025 Jayson Levin Tapia. All rights reserved.
+                </div>
+            </div>
+        </footer>
+<script src="script.js"></script>
 </body>
 </html>
